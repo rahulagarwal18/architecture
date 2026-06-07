@@ -1463,3 +1463,278 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 0.8rem;
   }
 }
+
+/* Highly Optimized Mobile/Tablet Landscape Layout */
+@media (max-height: 600px) and (orientation: landscape) {
+  /* Compact App Header */
+  .app-header {
+    padding: 0.4rem 1rem !important;
+    flex-direction: row !important;
+    gap: 0.5rem !important;
+    align-items: center !important;
+  }
+  
+  .app-header .subtitle {
+    display: none !important; /* Hide description subtitle to save vertical space */
+  }
+
+  .logo-container svg {
+    width: 1.5rem !important;
+    height: 1.5rem !important;
+  }
+
+  .logo-container h1 {
+    font-size: 1rem !important;
+  }
+
+  .search-container {
+    padding: 0.25rem 0.75rem !important;
+    width: 200px !important;
+  }
+
+  .action-btn {
+    padding: 0.3rem 0.75rem !important;
+    font-size: 0.75rem !important;
+  }
+
+  /* Compact View Navigation Tabs */
+  .view-navigation {
+    padding: 0.25rem 1rem !important;
+  }
+
+  .nav-tab {
+    padding: 0.3rem 0.75rem !important;
+    font-size: 0.8rem !important;
+  }
+
+  /* Compact Dashboard Viewport */
+  .dashboard-viewport {
+    padding: 0.5rem !important;
+    overflow-y: auto !important; /* Scrolling is handled at the main viewport level */
+  }
+
+  .view-panel {
+    padding: 0.5rem !important;
+  }
+
+  /* L1 Grid Columns */
+  .l1-grid-container {
+    gap: 0.75rem !important;
+  }
+
+  .l1-column {
+    padding: 0.5rem !important;
+    border-radius: 8px !important;
+  }
+
+  .column-header {
+    margin-bottom: 0.5rem !important;
+    padding-bottom: 0.4rem !important;
+  }
+
+  .column-header h2 {
+    font-size: 0.8rem !important;
+  }
+
+  /* Compact Cards */
+  .node-card {
+    padding: 0.4rem 0.5rem !important;
+    gap: 0.5rem !important;
+    border-radius: 6px !important;
+  }
+
+  .node-icon-wrapper {
+    width: 1.75rem !important;
+    height: 1.75rem !important;
+    border-radius: 4px !important;
+  }
+
+  .node-icon-wrapper svg {
+    width: 1rem !important;
+    height: 1rem !important;
+  }
+
+  .node-name {
+    font-size: 0.75rem !important;
+  }
+
+  .node-meta {
+    font-size: 0.6rem !important;
+  }
+
+  /* Sources: Make it a 2-column grid to cut height in half! */
+  .sources-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.4rem !important;
+    width: 380px !important;
+  }
+  
+  #col-sources {
+    width: 400px !important;
+  }
+
+  /* Lake Stages (T0-T3) inside storage column */
+  .lake-stages {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.4rem !important;
+  }
+
+  .lake-stage-card {
+    min-height: auto !important;
+    padding: 0.4rem !important;
+  }
+
+  .stage-header {
+    padding-bottom: 0.25rem !important;
+  }
+
+  .stage-name {
+    font-size: 0.7rem !important;
+  }
+
+  .lake-item-list {
+    gap: 0.2rem !important;
+  }
+
+  .lake-item-list li {
+    padding: 0.2rem 0.4rem !important;
+    font-size: 0.65rem !important;
+  }
+
+  /* Sub Category Cards */
+  .sub-category-card {
+    padding: 0.5rem !important;
+    gap: 0.4rem !important;
+  }
+
+  .sub-category-title {
+    font-size: 0.65rem !important;
+    margin-bottom: 0.15rem !important;
+  }
+
+  /* Cross cutting strips */
+  .cross-layer-strip {
+    grid-template-columns: 100px 1fr !important;
+  }
+
+  .strip-label {
+    padding: 0.5rem !important;
+    font-size: 0.7rem !important;
+  }
+
+  .strip-content {
+    padding: 0.5rem !important;
+    gap: 0.4rem !important;
+  }
+
+  .governance-capabilities .node-card {
+    padding: 0.3rem 0.5rem !important;
+    font-size: 0.7rem !important;
+  }
+
+  .dataplex-hub {
+    width: 100px !important;
+  }
+
+  /* L2 Layer Modifications for Landscape */
+  .l2-layer > .layer-header {
+    padding: 0.3rem 0.75rem !important;
+  }
+
+  .l2-layer > .layer-header h3 {
+    font-size: 0.75rem !important;
+  }
+
+  .l2-layer > .layer-body {
+    padding: 0.5rem !important;
+  }
+
+  .channel-integration-grid, .foundation-flex {
+    gap: 0.75rem !important;
+  }
+
+  .channel-group, .provisioning-group {
+    padding: 0.5rem !important;
+  }
+
+  .channel-group-title, .provisioning-group .group-title {
+    font-size: 0.65rem !important;
+    margin-bottom: 0.3rem !important;
+  }
+
+  .foundation-center-card {
+    padding: 0.5rem !important;
+  }
+
+  .foundation-center-card h4 {
+    font-size: 0.75rem !important;
+  }
+
+  .foundation-center-card p {
+    font-size: 0.65rem !important;
+  }
+
+  .gov-sub-layer {
+    padding: 0.5rem !important;
+  }
+
+  .gov-sub-layer .gov-title {
+    font-size: 0.65rem !important;
+    margin-bottom: 0.4rem !important;
+  }
+
+  .gov-chip {
+    padding: 0.25rem 0.5rem !important;
+    font-size: 0.65rem !important;
+  }
+
+  .infra-stack-card {
+    min-height: 36px !important;
+    padding: 0.3rem !important;
+    font-size: 0.6rem !important;
+  }
+
+  /* Detail Drawer on Small Height Devices */
+  .drawer-content {
+    max-width: 320px !important;
+  }
+
+  .drawer-body {
+    padding: 1.5rem 1rem !important;
+  }
+
+  .component-title {
+    font-size: 1.15rem !important;
+  }
+
+  .drawer-section {
+    margin-bottom: 1rem !important;
+  }
+
+  .drawer-section h3 {
+    font-size: 0.7rem !important;
+    margin-bottom: 0.4rem !important;
+  }
+
+  .component-description {
+    font-size: 0.8rem !important;
+  }
+
+  .tech-tag {
+    padding: 0.2rem 0.5rem !important;
+    font-size: 0.65rem !important;
+  }
+
+  .flow-io-block {
+    padding: 0.5rem !important;
+  }
+
+  .io-list {
+    font-size: 0.75rem !important;
+  }
+
+  .role-highlight {
+    padding: 0.5rem 0.75rem !important;
+    font-size: 0.75rem !important;
+  }
+}
