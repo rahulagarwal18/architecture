@@ -1088,31 +1088,51 @@ function setupFlowConnections() {
   // Let's create lines connecting columns
   // Column Centers or Edges
   const svgRect = svg.getBoundingClientRect();
+  const isStacked = window.innerWidth <= 1024;
 
   function getElementAnchor(elementId, side = "right") {
     const el = document.getElementById(elementId);
     if (!el) return null;
     const rect = el.getBoundingClientRect();
-    const x = side === "left" ? rect.left : rect.right;
-    const y = rect.top + rect.height / 2;
-    return {
-      x: x - svgRect.left,
-      y: y - svgRect.top
-    };
+    if (isStacked) {
+      // Stacked vertically: connect bottom of source to top of target
+      const x = rect.left + rect.width / 2;
+      const y = side === "right" ? rect.bottom : rect.top;
+      return {
+        x: x - svgRect.left,
+        y: y - svgRect.top
+      };
+    } else {
+      // Side-by-side horizontally: connect right of source to left of target
+      const x = side === "left" ? rect.left : rect.right;
+      const y = rect.top + rect.height / 2;
+      return {
+        x: x - svgRect.left,
+        y: y - svgRect.top
+      };
+    }
   }
 
   function getColumnAnchor(colElement, side = "right") {
     const rect = colElement.getBoundingClientRect();
-    const x = side === "left" ? rect.left : rect.right;
-    const y = rect.top + rect.height / 2;
-    return {
-      x: x - svgRect.left,
-      y: y - svgRect.top
-    };
+    if (isStacked) {
+      const x = rect.left + rect.width / 2;
+      const y = side === "right" ? rect.bottom : rect.top;
+      return {
+        x: x - svgRect.left,
+        y: y - svgRect.top
+      };
+    } else {
+      const x = side === "left" ? rect.left : rect.right;
+      const y = rect.top + rect.height / 2;
+      return {
+        x: x - svgRect.left,
+        y: y - svgRect.top
+      };
+    }
   }
 
   // Draw lines from Sources to Ingestion Cards
-  // Let's pick 3 key sources and draw path lines to Ingestion cards
   const activeSources = ["src-pos", "src-flight", "src-clickstream"];
   const ingestNodes = ["ing-functions", "ing-dataflow-batch", "ing-pubsub"];
 
@@ -1124,8 +1144,14 @@ function setupFlowConnections() {
     const pEnd = getElementAnchor(targetIngestId, "left");
 
     if (pStart && pEnd) {
+      let controlPoints;
+      if (isStacked) {
+        controlPoints = `C ${pStart.x} ${(pStart.y + pEnd.y) / 2}, ${pEnd.x} ${(pStart.y + pEnd.y) / 2}, ${pEnd.x} ${pEnd.y}`;
+      } else {
+        controlPoints = `C ${(pStart.x + pEnd.x) / 2} ${pStart.y}, ${(pStart.x + pEnd.x) / 2} ${pEnd.y}, ${pEnd.x} ${pEnd.y}`;
+      }
       pathsData.push({
-        path: `M ${pStart.x} ${pStart.y} C ${(pStart.x + pEnd.x) / 2} ${pStart.y}, ${(pStart.x + pEnd.x) / 2} ${pEnd.y}, ${pEnd.x} ${pEnd.y}`,
+        path: `M ${pStart.x} ${pStart.y} ${controlPoints}`,
         colorClass: index === 0 ? "" : (index === 1 ? "purple" : "emerald")
       });
     }
@@ -1141,8 +1167,14 @@ function setupFlowConnections() {
     const pEnd = getElementAnchor(targetLakeId, "left");
 
     if (pStart && pEnd) {
+      let controlPoints;
+      if (isStacked) {
+        controlPoints = `C ${pStart.x} ${(pStart.y + pEnd.y) / 2}, ${pEnd.x} ${(pStart.y + pEnd.y) / 2}, ${pEnd.x} ${pEnd.y}`;
+      } else {
+        controlPoints = `C ${(pStart.x + pEnd.x) / 2} ${pStart.y}, ${(pStart.x + pEnd.x) / 2} ${pEnd.y}, ${pEnd.x} ${pEnd.y}`;
+      }
       pathsData.push({
-        path: `M ${pStart.x} ${pStart.y} C ${(pStart.x + pEnd.x) / 2} ${pStart.y}, ${(pStart.x + pEnd.x) / 2} ${pEnd.y}, ${pEnd.x} ${pEnd.y}`,
+        path: `M ${pStart.x} ${pStart.y} ${controlPoints}`,
         colorClass: index === 0 ? "" : (index === 1 ? "purple" : "emerald")
       });
     }
@@ -1158,8 +1190,14 @@ function setupFlowConnections() {
     const pEnd = getElementAnchor(targetEnrId, "left");
 
     if (pStart && pEnd) {
+      let controlPoints;
+      if (isStacked) {
+        controlPoints = `C ${pStart.x} ${(pStart.y + pEnd.y) / 2}, ${pEnd.x} ${(pStart.y + pEnd.y) / 2}, ${pEnd.x} ${pEnd.y}`;
+      } else {
+        controlPoints = `C ${(pStart.x + pEnd.x) / 2} ${pStart.y}, ${(pStart.x + pEnd.x) / 2} ${pEnd.y}, ${pEnd.x} ${pEnd.y}`;
+      }
       pathsData.push({
-        path: `M ${pStart.x} ${pStart.y} C ${(pStart.x + pEnd.x) / 2} ${pStart.y}, ${(pStart.x + pEnd.x) / 2} ${pEnd.y}, ${pEnd.x} ${pEnd.y}`,
+        path: `M ${pStart.x} ${pStart.y} ${controlPoints}`,
         colorClass: index === 0 ? "" : "purple"
       });
     }
@@ -1175,8 +1213,14 @@ function setupFlowConnections() {
     const pEnd = getElementAnchor(targetConId, "left");
 
     if (pStart && pEnd) {
+      let controlPoints;
+      if (isStacked) {
+        controlPoints = `C ${pStart.x} ${(pStart.y + pEnd.y) / 2}, ${pEnd.x} ${(pStart.y + pEnd.y) / 2}, ${pEnd.x} ${pEnd.y}`;
+      } else {
+        controlPoints = `C ${(pStart.x + pEnd.x) / 2} ${pStart.y}, ${(pStart.x + pEnd.x) / 2} ${pEnd.y}, ${pEnd.x} ${pEnd.y}`;
+      }
       pathsData.push({
-        path: `M ${pStart.x} ${pStart.y} C ${(pStart.x + pEnd.x) / 2} ${pStart.y}, ${(pStart.x + pEnd.x) / 2} ${pEnd.y}, ${pEnd.x} ${pEnd.y}`,
+        path: `M ${pStart.x} ${pStart.y} ${controlPoints}`,
         colorClass: index === 0 ? "" : (index === 1 ? "purple" : "emerald")
       });
     }
