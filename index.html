@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enterprise Data Platform & UDAIP Capabilities Architecture</title>
+  <meta name="description" content="An interactive, high-fidelity visual dashboard of the GCP Enterprise Data Platform Architecture and UDAIP Platform Detailed Capabilities.">
+  
+  <!-- Typography & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Header Section -->
+  <header class="app-header">
+    <div class="header-left">
+      <div class="logo-container">
+        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h1>UDAIP & Enterprise Data Platform</h1>
+      </div>
+      <p class="subtitle">Supporting Changi Airport Group's Transformation Journey to a Data-Driven Organization</p>
+    </div>
+    
+    <div class="header-actions">
+      <!-- Search -->
+      <div class="search-container">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="search-input" placeholder="Search architecture (e.g. Gemini, Looker, MLOps)...">
+        <button id="clear-search" class="clear-btn">&times;</button>
+      </div>
+      
+      <!-- Flow Control (L1 only) -->
+      <button id="flow-toggle-btn" class="action-btn active" title="Toggle real-time data flows">
+        <span class="pulse-dot"></span>
+        Simulate Data Flow
+      </button>
+    </div>
+  </header>
+
+  <!-- View Switcher Tabs -->
+  <nav class="view-navigation" aria-label="Architecture View Switcher">
+    <button class="nav-tab active" data-target="l1-view" id="tab-l1">
+      <span class="tab-badge">L1</span>
+      GCP Enterprise Data Platform
+    </button>
+    <button class="nav-tab" data-target="l2-view" id="tab-l2">
+      <span class="tab-badge">L2</span>
+      UDAIP Detailed Capabilities
+    </button>
+  </nav>
+
+  <!-- Main Content Wrapper -->
+  <main class="dashboard-viewport">
+    
+    <!-- L1 VIEW: GCP Enterprise Data Platform -->
+    <section id="l1-view" class="view-panel active">
+      <!-- Background SVG connector lines and animated particles -->
+      <div class="flow-svg-overlay">
+        <svg id="flow-svg" width="100%" height="100%"></svg>
+      </div>
+      
+      <div class="l1-grid-container">
+        
+        <!-- Column 1: Data Sources -->
+        <div class="l1-column" id="col-sources">
+          <div class="column-header">
+            <h2>Data Sources</h2>
+          </div>
+          <div class="column-body sources-grid">
+            <!-- Dynamically populated sources -->
+          </div>
+        </div>
+
+        <!-- Column 2: Data Ingestion -->
+        <div class="l1-column" id="col-ingestion">
+          <div class="column-header">
+            <h2>Data Ingestion</h2>
+          </div>
+          <div class="column-body ingestion-stack">
+            <!-- Event-Driven -->
+            <div class="sub-category-card" id="cat-event-ingest">
+              <span class="sub-category-title">Event Driven Ingestion</span>
+              <div class="sub-category-items"></div>
+            </div>
+            <!-- Batch & Stream -->
+            <div class="sub-category-card" id="cat-batch-ingest">
+              <span class="sub-category-title">Batch & Stream Ingestion</span>
+              <div class="sub-category-items"></div>
+            </div>
+            <!-- Pub/Sub -->
+            <div class="sub-category-card" id="cat-pubsub-ingest">
+              <span class="sub-category-title">Pub/Sub Ingestion</span>
+              <div class="sub-category-items"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Column 3: Data Storage & Processing -->
+        <div class="l1-column" id="col-storage-processing">
+          <div class="column-header">
+            <h2>Data Storage & Processing</h2>
+          </div>
+          <div class="column-body storage-processing-grid">
+            
+            <!-- Landing Zone & Data Lake (T0 - T3) -->
+            <div class="lake-zone-container">
+              <div class="zone-header">Landing Zone & Data Lake</div>
+              <div class="lake-stages">
+                <!-- T0 Raw -->
+                <div class="lake-stage-card" id="lake-t0">
+                  <div class="stage-header">
+                    <span class="stage-badge">T0</span>
+                    <span class="stage-name">Raw</span>
+                  </div>
+                  <ul class="lake-item-list"></ul>
+                </div>
+                <!-- T1 Curated -->
+                <div class="lake-stage-card" id="lake-t1">
+                  <div class="stage-header">
+                    <span class="stage-badge">T1</span>
+                    <span class="stage-name">Curated</span>
+                  </div>
+                  <ul class="lake-item-list"></ul>
+                </div>
+                <!-- T2 Consumption -->
+                <div class="lake-stage-card" id="lake-t2">
+                  <div class="stage-header">
+                    <span class="stage-badge">T2</span>
+                    <span class="stage-name">Consumption</span>
+                  </div>
+                  <ul class="lake-item-list"></ul>
+                </div>
+                <!-- T3 Research -->
+                <div class="lake-stage-card" id="lake-t3">
+                  <div class="stage-header">
+                    <span class="stage-badge">T3</span>
+                    <span class="stage-name">Research</span>
+                  </div>
+                  <ul class="lake-item-list"></ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bottom half processing/science grid -->
+            <div class="processing-science-split">
+              <div class="sub-category-card" id="cat-processing-transform">
+                <span class="sub-category-title">Processing & Transformation</span>
+                <div class="sub-category-items flex-row"></div>
+              </div>
+              <div class="sub-category-card" id="cat-data-science">
+                <span class="sub-category-title">Data Science</span>
+                <div class="sub-category-items flex-row"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Column 4: Enrichment -->
+        <div class="l1-column" id="col-enrichment">
+          <div class="column-header">
+            <h2>Enrichment</h2>
+          </div>
+          <div class="column-body enrichment-stack">
+            <!-- Semantic -->
+            <div class="sub-category-card" id="cat-enrich-semantic">
+              <span class="sub-category-title">Semantic Enrichment</span>
+              <div class="sub-category-items"></div>
+            </div>
+            <!-- Graph DB -->
+            <div class="sub-category-card" id="cat-enrich-graph">
+              <span class="sub-category-title">Graph Database</span>
+              <div class="sub-category-items"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Column 5: Consumption -->
+        <div class="l1-column" id="col-consumption">
+          <div class="column-header">
+            <h2>Consumption</h2>
+          </div>
+          <div class="column-body consumption-stack">
+            <!-- Reporting -->
+            <div class="sub-category-card" id="cat-consume-reporting">
+              <span class="sub-category-title">Reporting & BI</span>
+              <div class="sub-category-items"></div>
+            </div>
+            <!-- AI Capability -->
+            <div class="sub-category-card" id="cat-consume-ai">
+              <span class="sub-category-title">AI Capability</span>
+              <div class="sub-category-items"></div>
+            </div>
+            <!-- Data Sharing -->
+            <div class="sub-category-card" id="cat-consume-sharing">
+              <span class="sub-category-title">Data Sharing</span>
+              <div class="sub-category-items"></div>
+            </div>
+            <!-- ML Serving -->
+            <div class="sub-category-card" id="cat-consume-serving">
+              <span class="sub-category-title">ML Serving</span>
+              <div class="sub-category-items"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- L1 Cross-cutting Layers -->
+      <div class="l1-cross-cutting">
+        <!-- Orchestration spanning Ingestion, Storage, Processing -->
+        <div class="cross-layer-strip orchestration" id="l1-layer-orchestration">
+          <div class="strip-label">Orchestration</div>
+          <div class="strip-content" id="l1-composer-container"></div>
+        </div>
+        
+        <!-- Infrastructure Automation Strip -->
+        <div class="cross-layer-strip infra" id="l1-layer-infra">
+          <div class="strip-label">Infrastructure Automation</div>
+          <div class="strip-content flex-row" id="l1-infra-container">
+            <span class="infra-pill">Infrastructure-as-Code (Terraform)</span>
+            <span class="infra-pill">CI/CD Pipelines (GitLab CI/Cloud Build)</span>
+            <span class="infra-pill">Automated Deployment & Testing</span>
+          </div>
+        </div>
+
+        <!-- Security & Operations Strip -->
+        <div class="cross-layer-strip security" id="l1-layer-security">
+          <div class="strip-label">Security & Operations</div>
+          <div class="strip-content" id="l1-security-container"></div>
+        </div>
+
+        <!-- Enterprise Data Governance (Dataplex) Strip -->
+        <div class="cross-layer-strip governance" id="l1-layer-governance">
+          <div class="strip-label">Enterprise Data Governance</div>
+          <div class="strip-content" id="l1-governance-container">
+            <div class="dataplex-hub" id="l1-dataplex-node"></div>
+            <div class="governance-capabilities" id="l1-gov-items"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+    <!-- L2 VIEW: UDAIP Detailed Capabilities -->
+    <section id="l2-view" class="view-panel">
+      <div class="l2-dashboard-container">
+        
+        <!-- Layer 1: Consumption -->
+        <div class="l2-layer" id="l2-layer-consumption">
+          <div class="layer-header">
+            <h3>Consumption</h3>
+          </div>
+          <div class="layer-body channel-integration-grid">
+            <div class="channel-group" id="l2-physical-channels">
+              <span class="channel-group-title">Physical Channels</span>
+              <div class="channel-items"></div>
+            </div>
+            
+            <div class="consumption-center" id="l2-consumption-center">
+              <!-- Data & AI Consumption node -->
+            </div>
+            
+            <div class="channel-group" id="l2-digital-channels">
+              <span class="channel-group-title">Digital Channels</span>
+              <div class="channel-items"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Layer 2: UDAIP Foundation -->
+        <div class="l2-layer" id="l2-layer-foundation">
+          <div class="layer-header">
+            <h3>UDAIP Foundation</h3>
+          </div>
+          <div class="layer-body foundation-flex">
+            <div class="provisioning-group" id="l2-provisioning">
+              <span class="group-title">Data & AI Provisioning</span>
+              <div class="provisioning-items"></div>
+            </div>
+            <div class="foundation-center-card" id="l2-foundation-center">
+              <h4>UDAIP Foundation Core</h4>
+              <p>Unified Platform Services, Framework APIs, and Common Infrastructure Components</p>
+            </div>
+            <div class="services-group" id="l2-foundation-services">
+              <!-- Self-Service, Data Sharing, Search -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Layer 3: Engines (Data Operating, Product Modelling, Analytics & AI) -->
+        <div class="engines-layout-row">
+          
+          <!-- Column A: Data Operating Engine -->
+          <div class="engine-column" id="l2-engine-data-operating">
+            <div class="engine-header">
+              <h4>Data Operating Engine</h4>
+            </div>
+            <div class="engine-body">
+              <div class="engine-sections" id="l2-doe-sections">
+                <!-- Integration, Engineering, Storage, Modelling -->
+              </div>
+              <div class="engine-footer-bar" id="l2-doe-footer">
+                <!-- DataOps -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Column B: Product Modelling Engine -->
+          <div class="engine-column" id="l2-engine-product-modelling">
+            <div class="engine-header">
+              <h4>Product Modelling Engine</h4>
+            </div>
+            <div class="engine-body">
+              <div class="engine-sections" id="l2-pme-sections">
+                <!-- Domain Data Products, Semantic Layer -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Column C: Analytics & AI Engine -->
+          <div class="engine-column" id="l2-engine-analytics-ai">
+            <div class="engine-header">
+              <h4>Analytics & AI Engine</h4>
+            </div>
+            <div class="engine-body">
+              <div class="engine-sections" id="l2-aae-sections">
+                <!-- Analytics, Core (AI/ML, Gen AI, Agentic, Agent Marketplace) -->
+              </div>
+              <div class="engine-footer-bar" id="l2-aae-footer">
+                <!-- AIOps -->
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Layer 4: Unified Governance Layer -->
+        <div class="l2-layer" id="l2-layer-governance">
+          <div class="layer-header">
+            <h3>Unified Governance Layer</h3>
+          </div>
+          <div class="layer-body governance-capabilities-flex">
+            <!-- Data & AI Security -->
+            <div class="gov-sub-layer" id="l2-gov-security">
+              <span class="gov-title">Data & AI Security</span>
+              <div class="gov-chips-grid"></div>
+            </div>
+            
+            <!-- Data Governance -->
+            <div class="gov-sub-layer" id="l2-gov-data">
+              <span class="gov-title">Data Governance</span>
+              <div class="gov-chips-grid"></div>
+            </div>
+            
+            <!-- AI Governance -->
+            <div class="gov-sub-layer" id="l2-gov-ai">
+              <span class="gov-title">AI Governance</span>
+              <div class="gov-chips-grid"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Layer 5: Base Cloud, Data, AI & Governance Platforms -->
+        <div class="l2-layer" id="l2-layer-base-platform">
+          <div class="layer-header">
+            <h3>Base Cloud, Data, AI & Governance Platforms</h3>
+          </div>
+          <div class="layer-body base-platforms-grid" id="l2-base-platforms">
+            <!-- 9 pillars of infrastructure capability -->
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Interactive Detail Inspector Side Drawer -->
+  <aside id="detail-drawer" class="detail-drawer" aria-hidden="true">
+    <div class="drawer-overlay" id="drawer-overlay-close"></div>
+    <div class="drawer-content">
+      <button class="drawer-close-btn" id="drawer-close" aria-label="Close details panel">&times;</button>
+      
+      <div class="drawer-body">
+        <div class="drawer-header-meta">
+          <span class="component-category" id="drawer-cat">Category</span>
+          <span class="component-status" id="drawer-status">Active</span>
+        </div>
+        
+        <h2 id="drawer-title" class="component-title">Component Title</h2>
+        
+        <div class="divider"></div>
+        
+        <section class="drawer-section">
+          <h3>Description</h3>
+          <p id="drawer-desc" class="component-description">Component description details will show up here...</p>
+        </section>
+
+        <section class="drawer-section" id="drawer-tech-section">
+          <h3>Technologies & Services</h3>
+          <div class="tech-tags" id="drawer-tech-tags">
+            <!-- Tech tags dynamically generated -->
+          </div>
+        </section>
+
+        <section class="drawer-section" id="drawer-io-section">
+          <h3>Data Flows & Interaction</h3>
+          <div class="flow-io-container">
+            <div class="flow-io-block">
+              <span class="io-label">Inputs / Sources</span>
+              <ul id="drawer-inputs" class="io-list"></ul>
+            </div>
+            <div class="flow-io-block">
+              <span class="io-label">Outputs / Downstream</span>
+              <ul id="drawer-outputs" class="io-list"></ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="drawer-section">
+          <h3>Role in Platform Architecture</h3>
+          <div class="role-highlight" id="drawer-role-text">
+            Key operational impact on Changi Airport Group data operations.
+          </div>
+        </section>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <div class="footer-content">
+      <span>Enterprise Data Platform Visual Modeler</span>
+      <span class="footer-divider">|</span>
+      <span class="confidential-tag">CONFIDENTIAL</span>
+      <span class="footer-divider">|</span>
+      <span>&copy; 2026 Changi Airport Group (CAG)</span>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

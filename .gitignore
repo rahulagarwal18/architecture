@@ -1,0 +1,4 @@
+# Ignore images (per user instruction: "don't push photo")
+*.jpeg
+*.jpg
+*.png
